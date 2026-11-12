@@ -31,13 +31,13 @@ def dijkstra(graph, src, dest):
     print("Shortest Distance:", distance[dest])
     print("Shortest path:", " -> ".join(predecessor[dest]))
 
-def validate_graph(graph):
+def validate_graph(graph):  #checks if neighbours are nodes in the graph
     for node, neighbours in graph.items():
         for n in neighbours:
             if n not in graph:
                 print(f"Problem: '{n}' (listed under '{node}') is not a node in the graph")
 
-def show_locations(graph): #checks if neighbours are nodes in the graph
+def show_locations(graph):
     print("\nAvailable locations:")
     print("--------------------")
 
