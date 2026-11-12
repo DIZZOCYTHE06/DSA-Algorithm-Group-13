@@ -31,34 +31,68 @@ def dijkstra(graph, src, dest):
     print("Shortest Distance:", distance[dest])
     print("Shortest path:", " -> ".join(predecessor[dest]))
 
+def validate_graph(graph):
+    for node, neighbours in graph.items():
+        for n in neighbours:
+            if n not in graph:
+                print(f"Problem: '{n}' (listed under '{node}') is not a node in the graph")
 
+def show_locations(graph): #checks if neighbours are nodes in the graph
+    print("\nAvailable locations:")
+    print("--------------------")
+
+    for location in sorted(graph.keys()):
+        print(location.title())
+
+    print("--------------------")
         
 
 
 graph = {
-    'Ginnery' : {'Victoria Avenue': 4, 'Limbe' : 6},
-    'Limbe' : {'Ginnery' : 6, 'Zomba' : 62},
-    'Victoria Avenue' : {'Ginnery' : 4, 'Zalewa' : 54},
-    'Zalewa' : {'Victoria Avenue' : 54, 'Ntcheu': 98, 'Balaka' : 90},
-    'Balaka' : {'Zalewa' : 90, 'Ntcheu' : 42, 'Liwonde' : 33, 'Monkeybay': 147},
-    'Zomba' : {'Limbe' : 62, 'Liwonde' : 51},
-    'Liwonde' : {'Zomba' : 51, 'Balaka' : 33, 'Monkeybay' : 136},
-    'Monkeybay' : {'Liwonde' : 136, 'Balaka' : 147, 'Salima' : 133},
-    'Ntcheu' : {'Zalewa' : 98, 'Balaka' : 42, 'Dedza' : 73},
-    'Dedza' : {'Ntcheu' : 73, 'Gateway' : 90},
-    'Gateway' : {'Dedza' : 90, 'Area 49' : 6},
-    'Area 49' : {'Gateway' : 6, 'Dowa' : 48},
-    'Dowa' : {'Area 49' : 48, 'Kasungu' : 118, 'Salima' : 67},
-    'Kasungu' : {'Dowa' : 118, 'Nkhotakota' : 112, 'Mzuzu' : 230},
-    'Nkhotakota' : {'Salima' : 112, 'Nkhatabay' : 194, 'Kasungu' : 112},
-    'Salima' : {'Monkeybay' : 133, 'Dowa' : 67, 'Nkhotakota' : 112},
-    'Nkhatabay' : {'Nkhotakota' : 194, 'Mzuzu' : 47},
-    'Mzuzu' : {'Nkhatabay' : 47, 'Rhumpi' : 68, 'Kasungu' : 230},
-    'Rhumpi' : {'Mzuzu' : 68, 'Karonga' : 173},
-    'Karonga' : {'Rhumpi' : 173}
+    'ginnery' : {'victoria avenue': 4, 'limbe' : 6},
+    'limbe' : {'ginnery' : 6, 'zomba' : 62},
+    'victoria avenue' : {'ginnery' : 4, 'zalewa' : 54},
+    'zalewa' : {'victoria avenue' : 54, 'ntcheu': 98, 'balaka' : 90},
+    'balaka' : {'zalewa' : 90, 'ntcheu' : 42, 'liwonde' : 33, 'monkeybay': 147},
+    'zomba' : {'limbe' : 62, 'liwonde' : 51},
+    'liwonde' : {'zomba' : 51, 'balaka' : 33, 'monkeybay' : 136},
+    'monkeybay' : {'liwonde' : 136, 'balaka' : 147, 'salima' : 133},
+    'ntcheu' : {'zalewa' : 98, 'balaka' : 42, 'dedza' : 73},
+    'dedza' : {'ntcheu' : 73, 'gateway' : 90},
+    'gateway' : {'dedza' : 90, 'area 49' : 6},
+    'area 49' : {'gateway' : 6, 'dowa' : 48},
+    'dowa' : {'area 49' : 48, 'kasungu' : 118, 'salima' : 67},
+    'kasungu' : {'dowa' : 118, 'nkhotakota' : 112, 'mzuzu' : 230},
+    'nkhotakota' : {'salima' : 112, 'nkhatabay' : 194, 'kasungu' : 112},
+    'salima' : {'monkeybay' : 133, 'dowa' : 67, 'nkhotakota' : 112},
+    'nkhatabay' : {'nkhotakota' : 194, 'mzuzu' : 47},
+    'mzuzu' : {'nkhatabay' : 47, 'rhumpi' : 68, 'kasungu' : 230},
+    'rhumpi' : {'mzuzu' : 68, 'karonga' : 173},
+    'karonga' : {'rhumpi' : 173}
 
 }
+validate_graph(graph)
 
-dijkstra(graph, "Karonga", "Dedza")
+print("welcome to Sana deliveries simulation")
 
+show_locations(graph)
 
+print("What is your point of origin? : ")
+
+origin = input()
+origin = origin.lower()
+
+print("What is your destinstion? :")
+
+destination = input()
+destination = destination.lower()
+
+if origin not in graph or destination not in graph: 
+    if origin not in graph:
+        print(f"Sorry, '{origin}' is not a possible location.")
+
+    if destination not in graph:
+        print(f"Sorry, '{destination}' is not a possible location.")
+
+else:
+        dijkstra(graph, origin, destination)
